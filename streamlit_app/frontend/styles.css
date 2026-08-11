@@ -1,0 +1,303 @@
+/* =========================================================
+   Aegis — Foundation stylesheet
+   Design tokens, base typography, layout, Streamlit overrides.
+   ========================================================= */
+
+:root {
+  /* Surfaces */
+  --bg-main: #F7F8FA;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #FBFCFD;
+
+  /* Text */
+  --text-strong: #111827;
+  --text-body: #4B5563;
+  --text-muted: #6B7280;
+
+  /* Lines */
+  --border: #E5E7EB;
+  --border-strong: #D1D5DB;
+
+  /* Accents */
+  --primary: #2563EB;
+  --primary-bg: #EFF6FF;
+  --primary-strong: #1D4ED8;
+
+  --safe: #15803D;
+  --safe-bg: #F0FDF4;
+  --safe-border: #BBF7D0;
+
+  --risk: #DC2626;
+  --risk-bg: #FEF2F2;
+  --risk-border: #FECACA;
+
+  --warn: #B45309;
+  --warn-bg: #FFFBEB;
+
+  /* Shape scale */
+  --r-btn: 10px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-2: 0 6px 16px -6px rgba(17, 24, 39, 0.10), 0 2px 4px rgba(17, 24, 39, 0.03);
+
+  --ease: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------------------------------------------------
+   Base
+   --------------------------------------------------------- */
+.stApp {
+  background-color: var(--bg-main) !important;
+  font-family: var(--font) !important;
+  color: var(--text-body) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+header[data-testid="stHeader"] { background: transparent !important; height: 0; }
+#MainMenu, footer, [data-testid="stStatusWidget"] { display: none !important; }
+
+.block-container {
+  padding-top: 3rem !important;
+  padding-bottom: 5rem !important;
+  max-width: 1180px;
+}
+
+/* Default text colour so nothing renders in low-contrast grey on white */
+.stApp p, .stApp li, .stApp span, .stApp label { color: var(--text-body); }
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp strong { color: var(--text-strong); }
+
+/* ---------------------------------------------------------
+   Typography
+   --------------------------------------------------------- */
+h1, .page-title {
+  font-size: 2.05rem !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+  color: var(--text-strong) !important;
+  margin: 0 0 var(--s-3) 0 !important;
+  padding: 0 !important;
+}
+
+h2 { font-size: 1.35rem !important; font-weight: 650 !important; letter-spacing: -0.015em !important; }
+h3 { font-size: 1rem !important; font-weight: 650 !important; letter-spacing: -0.005em !important; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--primary) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--s-3);
+}
+.eyebrow svg { stroke: var(--primary); }
+
+.page-lede {
+  color: var(--text-body) !important;
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 62ch;
+  margin: 0;
+}
+
+.page-head { margin-bottom: var(--s-6); }
+
+/* Section heading: label + optional description, no heavy rules */
+.section-head { margin: var(--s-7) 0 var(--s-4) 0; }
+.section-head .section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted) !important;
+}
+.section-head .section-desc {
+  margin-top: var(--s-1);
+  font-size: 0.92rem;
+  color: var(--text-body) !important;
+}
+
+/* ---------------------------------------------------------
+   Sidebar
+   --------------------------------------------------------- */
+section[data-testid="stSidebar"] {
+  background-color: var(--bg-card) !important;
+  border-right: 1px solid var(--border);
+  width: 262px !important;
+}
+section[data-testid="stSidebar"] > div { padding-top: var(--s-5); }
+
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 var(--s-2) var(--s-5) var(--s-2); }
+.brand-mark {
+  width: 34px; height: 34px; border-radius: var(--r-sm);
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: #FFFFFF; font-weight: 700; font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
+  flex: 0 0 auto;
+}
+.brand-name { font-size: 1.05rem; font-weight: 700; color: var(--text-strong); line-height: 1.2; }
+.brand-sub { font-size: 0.74rem; color: var(--text-muted); line-height: 1.2; margin-top: 2px; }
+
+.nav-group-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted) !important;
+  padding: var(--s-4) var(--s-2) var(--s-2) var(--s-2);
+}
+
+/* Nav items are real buttons so keyboard focus and screen readers work */
+section[data-testid="stSidebar"] .stButton > button {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 550;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--r-btn);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-body) !important;
+  transition: background var(--ease), color var(--ease);
+}
+section[data-testid="stSidebar"] .stButton > button:hover {
+  background: var(--bg-main);
+  color: var(--text-strong) !important;
+  transform: none;
+  box-shadow: none;
+}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"] {
+  background: var(--primary-bg);
+  color: var(--primary-strong) !important;
+  border-color: #DBEAFE;
+  font-weight: 650;
+}
+section[data-testid="stSidebar"] .stButton > button p { color: inherit !important; font-weight: inherit; }
+
+.sidebar-foot {
+  margin-top: var(--s-6);
+  padding: var(--s-4) var(--s-2) 0 var(--s-2);
+  border-top: 1px solid var(--border);
+  font-size: 0.74rem;
+  color: var(--text-muted) !important;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------
+   Widgets
+   --------------------------------------------------------- */
+div[data-testid="stWidgetLabel"] p, .stApp label p {
+  color: var(--text-strong) !important;
+  font-weight: 600 !important;
+  font-size: 0.86rem !important;
+}
+
+div[data-baseweb="select"] > div,
+div[data-baseweb="input"] > div,
+.stNumberInput div[data-baseweb="input"] {
+  border-radius: var(--r-btn) !important;
+  background-color: #FFFFFF !important;
+  border-color: var(--border) !important;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+div[data-baseweb="select"] > div:hover,
+div[data-baseweb="input"] > div:hover { border-color: var(--border-strong) !important; }
+div[data-baseweb="select"] > div:focus-within,
+div[data-baseweb="input"] > div:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+div[data-baseweb="select"] *, div[data-baseweb="input"] *, input, textarea {
+  color: var(--text-strong) !important;
+}
+div[data-baseweb="popover"] li { color: var(--text-strong) !important; }
+div[data-baseweb="popover"] li:hover { background: var(--primary-bg) !important; }
+
+/* Main-area buttons */
+.main .stButton > button, div[data-testid="stMainBlockContainer"] .stButton > button,
+.stDownloadButton > button {
+  border-radius: var(--r-btn);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--text-strong) !important;
+  background: var(--bg-card);
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+}
+div[data-testid="stMainBlockContainer"] .stButton > button:hover,
+.stDownloadButton > button:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+}
+div[data-testid="stMainBlockContainer"] .stButton > button[kind="primary"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #FFFFFF !important;
+}
+div[data-testid="stMainBlockContainer"] .stButton > button[kind="primary"] p { color: #FFFFFF !important; }
+div[data-testid="stMainBlockContainer"] .stButton > button[kind="primary"]:hover { background: var(--primary-strong); }
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] { gap: var(--s-5); border-bottom: 1px solid var(--border); }
+.stTabs [data-baseweb="tab"] {
+  padding: 0 0 var(--s-3) 0;
+  color: var(--text-muted) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.stTabs [aria-selected="true"] { color: var(--text-strong) !important; }
+.stTabs [data-baseweb="tab-highlight"] { background-color: var(--primary); }
+
+/* Bordered containers become the canonical card */
+div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div[data-testid="stVerticalBlock"]) {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-1);
+}
+div[data-testid="stVerticalBlockBorderWrapper"] { padding: 0; }
+
+/* Equal-height columns */
+div[data-testid="stHorizontalBlock"] { align-items: stretch; }
+div[data-testid="stColumn"] > div { height: 100%; }
+
+/* Dataframe legibility */
+div[data-testid="stDataFrame"] { border-radius: var(--r-sm); border: 1px solid var(--border); }
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .block-container { padding-left: 1.75rem !important; padding-right: 1.75rem !important; }
+  h1, .page-title { font-size: 1.8rem !important; }
+}
+@media (max-width: 820px) {
+  div[data-testid="stHorizontalBlock"] { flex-wrap: wrap; }
+  div[data-testid="stColumn"] { min-width: 100% !important; }
+  .block-container { padding-top: 2rem !important; }
+}
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
